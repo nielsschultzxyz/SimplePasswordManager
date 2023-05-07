@@ -1,6 +1,8 @@
-﻿namespace SimplePasswordManager.MVVM.ViewModel;
+﻿using System.Windows.Controls;
 
-public class GernatePasswordViewModel
+namespace SimplePasswordManager.MVVM.ViewModel;
+
+public class GernatePasswordViewModel : Core.ViewModel
 {
     
 }

@@ -1,6 +1,6 @@
 ﻿namespace SimplePasswordManager.MVVM.ViewModel;
 
-public class ManagePasswordsViewModel
+public class ManagePasswordsViewModel : Core.ViewModel
 {
     
 }

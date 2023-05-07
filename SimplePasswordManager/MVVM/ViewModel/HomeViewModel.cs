@@ -1,6 +1,6 @@
 ﻿namespace SimplePasswordManager.MVVM.ViewModel;
 
-public class HomeViewModel
+public class HomeViewModel : Core.ViewModel
 {
     
 }
