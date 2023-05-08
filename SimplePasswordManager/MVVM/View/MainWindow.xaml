@@ -36,8 +36,10 @@
                                FontSize="15"
                                FontWeight="Bold"/>
                         <Button Content="Home"
-                                Command="{Binding NavigateToHomeCommand}"/>
-                        <Button Content="Settings"/>
+                                Command="{Binding NavigateToHomeCommand}"
+                                Style="{StaticResource MenuBtnStyleText}"/>
+                        <Button Content="Settings"
+                                Style="{StaticResource MenuBtnStyleText}"/>
                     </StackPanel>
 
                     <!--Row 2 NavMenu-->
@@ -76,10 +78,12 @@
 
                                 <RadioButton Content="generate password"
                                              Command="{Binding NavigateToGeneratePasswordCommand}"
-                                             Margin="32,0,0,0"/>
+                                             Margin="32,0,0,0"
+                                             Style="{StaticResource RadioBtnMenuStyle}"/>
 
                                 <RadioButton Content="Manage passwords"
-                                             Command="{Binding NavigateToManagePasswordsCommand}"/>
+                                             Command="{Binding NavigateToManagePasswordsCommand}"
+                                             Style="{StaticResource RadioBtnMenuStyle}"/>
                             </StackPanel>
                         </Border>
                     </Grid>

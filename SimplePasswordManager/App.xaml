@@ -6,7 +6,12 @@
              xmlns:view="clr-namespace:SimplePasswordManager.MVVM.View">
     <Application.Resources>
          <ResourceDictionary>
-             
+             <!--Theme-->
+             <ResourceDictionary.MergedDictionaries>
+                 <ResourceDictionary Source="Themes/MenuBtnStyleText.xaml"/>
+                 <ResourceDictionary Source="Themes/RadioBtnMenuStyle.xaml"/>
+
+             </ResourceDictionary.MergedDictionaries>
              
              <!--DataTemplates-->
              <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
