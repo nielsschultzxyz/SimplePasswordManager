@@ -29,7 +29,7 @@ public class GernatePasswordViewModel : Core.ViewModel
             OnPropertyChanged();
         }
     }
-    private int _passwordSpecialChars { get; set; }
+    private int _passwordSpecialChars { get; set; } 
 
     public int PasswordSpecailChars
     {
@@ -43,7 +43,7 @@ public class GernatePasswordViewModel : Core.ViewModel
   
     private string _generatedPassword { get; set; }
 
-    public string GenerateedPassword
+    public string GeneratedPassword
     {
         get => _generatedPassword;
         set
@@ -75,7 +75,7 @@ public class GernatePasswordViewModel : Core.ViewModel
                 upper = Convert.ToInt32(PasswordUppercaseLetters);
                 specail = Convert.ToInt32(PasswordSpecailChars);
             }
-            GenerateedPassword = generateRandomPassword(length, upper, specail);
+            GeneratedPassword = generateRandomPassword(length, upper, specail);
         }, o => true);
     }
 
