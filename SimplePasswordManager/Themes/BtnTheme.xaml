@@ -3,7 +3,7 @@
     
     <Style TargetType="{x:Type Button}">
         <Style.Setters>
-            <Setter Property="Background" Value="#222222"/>
+            <Setter Property="Background" Value="#4b40bf"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Height" Value="32"/>
@@ -17,7 +17,8 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="LightBlue"/>
+                                <Setter Property="Background" Value="Gray"/>
+                                <Setter Property="Foreground" Value="White"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
