@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Windows.Controls;
 
 namespace SimplePasswordManager.MVVM.ViewModel;
 
@@ -39,8 +41,13 @@ public class ManagePasswordsViewModel : Core.ViewModel
         }
     }
 
+    public List<string> TestCollection { get; set; }
+    
     public ManagePasswordsViewModel()
     {
-        
+        TestCollection = new List<string>()
+        {
+            "item1", "item2", "item3", "item4", "item5", "item6", "item7", "item8" 
+        };
     }
 }
