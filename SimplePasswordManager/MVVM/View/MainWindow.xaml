@@ -35,9 +35,11 @@
                                Foreground="White"
                                FontSize="15"
                                FontWeight="Bold"/>
+                        <!--
                         <Button Content="Home"
                                 Command="{Binding NavigateToHomeCommand}"
                                 Style="{StaticResource MenuBtnStyleText}"/>
+                                -->
                         <Button Content="Settings"
                                 Style="{StaticResource MenuBtnStyleText}"/>
                     </StackPanel>
@@ -75,10 +77,16 @@
                                            FontWeight="Bold"
                                            FontSize="14"
                                            Margin="12,0,0,0"/>
-
+    
+                                <RadioButton Content="Home"
+                                             Command="{Binding NavigateToHomeCommand, UpdateSourceTrigger=PropertyChanged}"
+                                             Margin="32,0,0,0"
+                                             Style="{StaticResource RadioBtnMenuStyle}"
+                                             IsChecked="True"/>
+                                
                                 <RadioButton Content="generate password"
                                              Command="{Binding NavigateToGeneratePasswordCommand}"
-                                             Margin="32,0,0,0"
+                                             Margin="0,0,0,0"
                                              Style="{StaticResource RadioBtnMenuStyle}"/>
 
                                 <RadioButton Content="Manage passwords"

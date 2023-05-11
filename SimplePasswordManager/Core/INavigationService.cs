@@ -2,6 +2,6 @@
 
 public interface INavigationService
 {
-    ViewModel CurrentView { get; }
+    ViewModel CurrentView { get; set; }
     void NavigateTo<T>() where T : ViewModel;
 }

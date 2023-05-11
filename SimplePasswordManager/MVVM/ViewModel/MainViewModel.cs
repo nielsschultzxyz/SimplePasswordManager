@@ -24,6 +24,7 @@ public class MainViewModel : Core.ViewModel
     public MainViewModel(INavigationService navSerivce)
     {
         Navigation = navSerivce;
+        Navigation.CurrentView = new HomeViewModel();
 
         NavigateToHomeCommand = new RelayCommand(o => { Navigation.NavigateTo<HomeViewModel>(); }, o => true);
         NavigateToGeneratePasswordCommand = new RelayCommand(o => { Navigation.NavigateTo<GernatePasswordViewModel>(); }, o => true);

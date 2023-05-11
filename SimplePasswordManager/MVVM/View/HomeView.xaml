@@ -6,9 +6,13 @@
              xmlns:local="clr-namespace:SimplePasswordManager.MVVM.View"
              mc:Ignorable="d"
              d:DesignHeight="720" d:DesignWidth="980">
-    <Grid Background="Aqua">
+    <Grid Background="#15171e">
+        
         <TextBlock HorizontalAlignment="Center"
                    VerticalAlignment="Center"
-                   Text="HomeView"/>
+                   Text="🏠 HomeView"
+                   Foreground="White"
+                   FontSize="22"
+                   FontWeight="Bold"/>
     </Grid>
 </UserControl>
