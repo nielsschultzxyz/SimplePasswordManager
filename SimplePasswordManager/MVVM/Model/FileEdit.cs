@@ -6,7 +6,6 @@ namespace SimplePasswordManager.MVVM.Model;
 
 public class FileEdit : IFileEdit
 {
-    // TODO: need to filter the values string.split? (; and ,)
     public string getTxtFileValues(string path)
     {
         var txtStringValues = "";
