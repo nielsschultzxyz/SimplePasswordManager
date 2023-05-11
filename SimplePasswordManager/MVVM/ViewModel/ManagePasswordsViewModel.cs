@@ -1,13 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
+using SimplePasswordManager.Core;
 using SimplePasswordManager.Encryption;
+using SimplePasswordManager.MVVM.Model;
 
 namespace SimplePasswordManager.MVVM.ViewModel;
 
 public class ManagePasswordsViewModel : Core.ViewModel
 {
     private EncryptionHandler _encryptionHandler;
+    private FileEdit _fileEdit;
+    
     private string _appPassword = "AppPassword";
 
     public string AppPassword
@@ -43,15 +47,24 @@ public class ManagePasswordsViewModel : Core.ViewModel
         }
     }
 
+    public RelayCommand AddNewManagePasswordCommand { get; set; }
     public List<string> TestCollection { get; set; }
     
     public ManagePasswordsViewModel()
     {
         _encryptionHandler = new EncryptionHandler();
+        _fileEdit = new FileEdit();
         
         TestCollection = new List<string>()
         {
             "item1", "item2", "item3", "item4", "item5", "item6", "item7", "item8" 
         };
+        
+        // RelayCommands
+        AddNewManagePasswordCommand = new RelayCommand(o =>
+        {
+            var newManagePassowrdInfoString = $"{AppName},{AppUsername},{_encryptionHandler.Encrypt(AppPassword)};";
+            _fileEdit.setTxtFileValues(@"..\..\PasswordManageTxtFile.txt", newManagePassowrdInfoString);   
+        }, o => true);
     }
 }
