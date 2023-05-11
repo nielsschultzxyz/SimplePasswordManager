@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
+using SimplePasswordManager.Encryption;
 
 namespace SimplePasswordManager.MVVM.ViewModel;
 
 public class ManagePasswordsViewModel : Core.ViewModel
 {
+    private EncryptionHandler _encryptionHandler;
     private string _appPassword = "AppPassword";
 
     public string AppPassword
@@ -45,6 +47,8 @@ public class ManagePasswordsViewModel : Core.ViewModel
     
     public ManagePasswordsViewModel()
     {
+        _encryptionHandler = new EncryptionHandler();
+        
         TestCollection = new List<string>()
         {
             "item1", "item2", "item3", "item4", "item5", "item6", "item7", "item8" 
