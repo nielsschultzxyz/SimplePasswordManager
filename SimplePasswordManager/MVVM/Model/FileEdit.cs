@@ -12,9 +12,9 @@ public class FileEdit : IFileEdit
         
         try
         {
-            using (StreamReader sr = new StreamReader(path))
+            if (File.Exists(path))
             {
-                if (File.Exists(path))
+                using (StreamReader sr = new StreamReader(path))
                 {
                     while (!sr.EndOfStream)
                     {
@@ -22,10 +22,10 @@ public class FileEdit : IFileEdit
                     }
                     sr.Close();
                 }
-                else
-                {
-                    File.Create(@"..\..\PasswordManageTxtFile.txt");
-                }
+            }
+            else
+            {
+                File.Create(@"..\..\PasswordManageTxtFile.txt");
             }
         }
         catch (Exception exception)
@@ -39,13 +39,16 @@ public class FileEdit : IFileEdit
     {
         try
         {
-            using (StreamWriter sw = new StreamWriter(path, append: true))
+            if (File.Exists(path))
             {
-                if (File.Exists(path))
+                using (StreamWriter sw = new StreamWriter(path, append: true))
                 {
-                    sw.WriteLineAsync(value);
-                }
-                sw.Close();
+                    sw.Close();
+                } 
+            }
+            else
+            {
+                MessageBox.Show($"Filepath cant be found {path}");
             }
         }
         catch (Exception exception)
