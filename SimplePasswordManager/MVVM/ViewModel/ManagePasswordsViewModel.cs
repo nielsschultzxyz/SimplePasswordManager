@@ -49,6 +49,42 @@ public class ManagePasswordsViewModel : Core.ViewModel
         }
     }
 
+    private string _appNameInfo = "AppNameInfo";
+
+    public string AppNameInfo
+    {
+        get => _appNameInfo;
+        set
+        {
+            _appNameInfo = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private string _appUsernameInfo = "AppUsernameInfo";
+
+    public string AppUsernameInfo
+    {
+        get => _appUsernameInfo;
+        set
+        {
+            _appUsernameInfo = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private string _appPasswordInfo = "AppPasswordInfo";
+
+    public string AppPasswordInfo
+    {
+        get => _appPasswordInfo;
+        set
+        {
+            _appPasswordInfo = value;
+            OnPropertyChanged();
+        }
+    }
+    
     public RelayCommand AddNewManagePasswordCommand { get; set; }
     public List<string> TestCollection { get; set; }
 
