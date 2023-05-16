@@ -47,8 +47,10 @@
                         
                         <!--Tempalte layout-->
                         <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="Binding App" Margin="8,2,8,2" VerticalAlignment="Center" Foreground="LightGray" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding appName}" Margin="8,4,8,4" VerticalAlignment="Center" Foreground="LightGray" FontWeight="Bold"/>
+                            <!--
                             <TextBlock Text="Binding Username" Margin="22,2,8,2" VerticalAlignment="Center" Foreground="White"/>
+                            -->
                         </StackPanel>
                     </Border>
                 </DataTemplate>

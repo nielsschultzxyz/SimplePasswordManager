@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
 using SimplePasswordManager.Core;
 using SimplePasswordManager.Encryption;
@@ -85,18 +86,20 @@ public class ManagePasswordsViewModel : Core.ViewModel
         }
     }
     
+    //  RelayCommands
     public RelayCommand AddNewManagePasswordCommand { get; set; }
+    public RelayCommand ShowPasswordClearTextCommand { get; set; }
     public List<string> TestCollection { get; set; }
 
-    private ObservableCollection<PasswordManageModel>? _passwordManageCollection;
+    private static ObservableCollection<PasswordManageModel>? _passwordManageCollection;
 
-    public ObservableCollection<PasswordManageModel>? PasswordManageCollection
+    public static ObservableCollection<PasswordManageModel>? PasswordManageCollection
     {
         get => _passwordManageCollection;
         set
         {
             _passwordManageCollection = value;
-            OnPropertyChanged();
+            //OnPropertyChanged();
         }
     }
 
@@ -109,6 +112,9 @@ public class ManagePasswordsViewModel : Core.ViewModel
         var txtManagePasswordString = _fileEdit.getTxtFileValues(filePath);
         getCollecionValues(txtManagePasswordString);
         
+        // TODO: ListViewItem isSelected -> fill props PasswordInfos (AppName, AppUsername, AppPassword) if-statemente in ShowPasswordClearText to check and confirm the values?
+        
+        // Test Collection (Testing ListViewTheme)
         TestCollection = new List<string>()
         {
             "item1", "item2", "item3", "item4", "item5", "item6", "item7", "item8" 
@@ -118,7 +124,21 @@ public class ManagePasswordsViewModel : Core.ViewModel
         AddNewManagePasswordCommand = new RelayCommand(o =>
         {
             var newManagePassowrdInfoString = $"{AppName} {AppUsername} {_encryptionHandler.Encrypt(AppPassword)};";
-            _fileEdit.setTxtFileValues(filePath, newManagePassowrdInfoString);   
+            _fileEdit.setTxtFileValues(filePath, newManagePassowrdInfoString);
+            
+            // Add Model
+            PasswordManageCollection.Add(new PasswordManageModel(AppName, AppUsername, _encryptionHandler.Encrypt(AppPassword)));
+            MessageBox.Show($"Added new ManagePassword:\n{AppName}, {AppUsername}, {_encryptionHandler.Encrypt(AppPassword)}");
+
+            AppName = "AppName";
+            AppUsername = "Username";
+            AppPassword = "AppPassword";
+        }, o => true);
+
+        ShowPasswordClearTextCommand = new RelayCommand(o =>
+        {
+            // get the cipherText out of the Model -> in terms to display clearText
+            AppPasswordInfo = _encryptionHandler.Decrypt(AppPasswordInfo);
         }, o => true);
     }
 

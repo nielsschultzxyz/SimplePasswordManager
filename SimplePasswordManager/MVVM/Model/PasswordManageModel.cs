@@ -2,7 +2,7 @@
 
 public class PasswordManageModel
 {
-    private string appName { get; set; }
+    public string appName { get; set; }
     private string appUsername { get; set; }
     private string appPassword { get; set; }
 
