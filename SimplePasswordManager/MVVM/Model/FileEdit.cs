@@ -43,6 +43,7 @@ public class FileEdit : IFileEdit
             {
                 using (StreamWriter sw = new StreamWriter(path, append: true))
                 {
+                    sw.WriteLine(value);
                     sw.Close();
                 } 
             }

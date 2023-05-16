@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -89,8 +90,8 @@ public class ManagePasswordsViewModel : Core.ViewModel
     //  RelayCommands
     public RelayCommand AddNewManagePasswordCommand { get; set; }
     public RelayCommand ShowPasswordClearTextCommand { get; set; }
-    public List<string> TestCollection { get; set; }
 
+    // Collection
     private static ObservableCollection<PasswordManageModel>? _passwordManageCollection;
 
     public static ObservableCollection<PasswordManageModel>? PasswordManageCollection
@@ -114,12 +115,6 @@ public class ManagePasswordsViewModel : Core.ViewModel
         
         // TODO: ListViewItem isSelected -> fill props PasswordInfos (AppName, AppUsername, AppPassword) if-statemente in ShowPasswordClearText to check and confirm the values?
         
-        // Test Collection (Testing ListViewTheme)
-        TestCollection = new List<string>()
-        {
-            "item1", "item2", "item3", "item4", "item5", "item6", "item7", "item8" 
-        };
-        
         // RelayCommands
         AddNewManagePasswordCommand = new RelayCommand(o =>
         {
@@ -130,6 +125,7 @@ public class ManagePasswordsViewModel : Core.ViewModel
             PasswordManageCollection.Add(new PasswordManageModel(AppName, AppUsername, _encryptionHandler.Encrypt(AppPassword)));
             MessageBox.Show($"Added new ManagePassword:\n{AppName}, {AppUsername}, {_encryptionHandler.Encrypt(AppPassword)}");
 
+            // set default values
             AppName = "AppName";
             AppUsername = "Username";
             AppPassword = "AppPassword";
@@ -148,14 +144,22 @@ public class ManagePasswordsViewModel : Core.ViewModel
         {
             return;
         }
-        
-        string[] splitManagePasswordLine = txtFileValues.Split(";");
-        string[] splitManagePasswordStrings = new string[3];
-        
-        foreach (var s in splitManagePasswordLine)
+
+        try
         {
-            splitManagePasswordStrings = s.Split(" ");
-            PasswordManageCollection.Add(new PasswordManageModel(splitManagePasswordStrings[0], splitManagePasswordStrings[1], splitManagePasswordStrings[2]));
+            string[] splitManagePasswordLine = txtFileValues.Split(";");
+            string[] splitManagePasswordStrings;
+
+            foreach (var s in splitManagePasswordLine)
+            {
+                splitManagePasswordStrings = s.Split(" ");
+                PasswordManageCollection?.Add(new PasswordManageModel(splitManagePasswordStrings[0], 
+                    splitManagePasswordStrings[1], splitManagePasswordStrings[2]));
+            }
+        }
+        catch (Exception ex)    
+        {
+            MessageBox.Show(ex.Message);
         }
     }
 }
