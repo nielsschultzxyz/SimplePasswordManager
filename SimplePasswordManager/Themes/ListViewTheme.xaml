@@ -44,7 +44,13 @@
                                 </Style.Triggers>
                             </Style>
                         </Border.Style>
-                        
+                        <!--
+                        <Border.InputBindings>
+                            <MouseBinding MouseAction="{x:Static MouseAction.LeftDoubleClick}"
+                                          Command="{Binding RelativeSource={RelativeSource AncestorType=ListView}, Path=DataContext.ShowPasswordClearTextCommand}"
+                                          CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ListView}, Path=SelectedItem}"/>
+                        </Border.InputBindings>
+                        -->
                         <!--Tempalte layout-->
                         <StackPanel VerticalAlignment="Center">
                             <TextBlock Text="{Binding appName}" Margin="8,4,8,4" VerticalAlignment="Center" Foreground="LightGray" FontWeight="Bold"/>

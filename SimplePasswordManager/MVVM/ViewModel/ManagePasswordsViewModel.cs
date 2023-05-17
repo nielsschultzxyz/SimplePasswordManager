@@ -17,7 +17,7 @@ public class ManagePasswordsViewModel : Core.ViewModel
     private EncryptionHandler _encryptionHandler;
     private FileEdit _fileEdit;
     
-    public static PasswordManageModel _passwordManageModel;
+    public static PasswordManageModel _passwordManageModel { get; set; }
     
     private string _appPassword = "AppPassword";
 
@@ -54,7 +54,7 @@ public class ManagePasswordsViewModel : Core.ViewModel
         }
     }
 
-    private string _appNameInfo = "AppNameInfo";
+    private string _appNameInfo = $"AppNameInfo";
 
     public string AppNameInfo
     {
@@ -93,6 +93,7 @@ public class ManagePasswordsViewModel : Core.ViewModel
     //  RelayCommands
     public RelayCommand AddNewManagePasswordCommand { get; set; }
     public RelayCommand ShowPasswordClearTextCommand { get; set; }
+    public RelayCommand ShowManagePasswordValuesCommand { get; set; }
 
     // Collection
     private static ObservableCollection<PasswordManageModel>? _passwordManageCollection;
@@ -117,12 +118,10 @@ public class ManagePasswordsViewModel : Core.ViewModel
         var txtManagePasswordString = _fileEdit.getTxtFileValues(filePath);
         getCollecionValues(txtManagePasswordString);
         
-        // TODO: ListViewItem isSelected -> fill props PasswordInfos (AppName, AppUsername, AppPassword) if-statemente in ShowPasswordClearText to check and confirm the values?
-        
         // RelayCommands
         AddNewManagePasswordCommand = new RelayCommand(o =>
         {
-            var newManagePassowrdInfoString = $"{AppName} {AppUsername} {_encryptionHandler.Encrypt(AppPassword)};";
+            var newManagePassowrdInfoString = $"{AppName} {AppUsername} {_encryptionHandler.Encrypt(AppPassword)}";
             _fileEdit.setTxtFileValues(filePath, newManagePassowrdInfoString);
             
             // Add Model
@@ -135,10 +134,20 @@ public class ManagePasswordsViewModel : Core.ViewModel
             AppPassword = "AppPassword";
         }, o => true);
 
+        ShowManagePasswordValuesCommand = new RelayCommand(o =>
+        {
+            if (string.IsNullOrEmpty(_passwordManageModel.appPassword))
+                return;
+
+            AppNameInfo = _passwordManageModel.appName;
+            AppUsernameInfo = _passwordManageModel.appUsername;
+            AppPasswordInfo = _passwordManageModel.appPassword;
+
+        }, o => true);
+        
         ShowPasswordClearTextCommand = new RelayCommand(o =>
         {
-            // get the cipherText out of the Model -> in terms to display clearText
-            AppPasswordInfo = _encryptionHandler.Decrypt(AppPasswordInfo);
+            AppPasswordInfo = _encryptionHandler.Decrypt(_passwordManageModel.appPassword);
         }, o => true);
     }
 
@@ -151,21 +160,24 @@ public class ManagePasswordsViewModel : Core.ViewModel
 
         try
         {
-            // \n separator?
-            string[] splitManagePasswordLine = txtFileValues.Split(";");
+            string[] splitManagePasswordLine = txtFileValues.Split("\n");
             string[] splitManagePasswordStrings;
+
+            PasswordManageModel addPasswordModel;
 
             if (splitManagePasswordLine.Length > 0)
             {
                 for (int i = 0; i < splitManagePasswordLine.Length -1; i++)
                 {
                     splitManagePasswordStrings = splitManagePasswordLine[i].Split(" ");
-                    PasswordManageCollection?.Add(new PasswordManageModel(splitManagePasswordStrings[0], 
-                        splitManagePasswordStrings[1], 
-                        splitManagePasswordStrings[2]));
+                    
+                    addPasswordModel = new PasswordManageModel(splitManagePasswordStrings[0],
+                        splitManagePasswordStrings[1],
+                        splitManagePasswordStrings[2]);
+                    
+                    PasswordManageCollection?.Add(addPasswordModel);
                 }    
             }
-            
         }
         catch (Exception ex)    
         {
