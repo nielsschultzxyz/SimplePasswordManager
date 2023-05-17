@@ -15,16 +15,47 @@ public partial class ManagePasswordsView : UserControl
 
     private void SelectedItems(object sender, RoutedEventArgs e)
     {
-        if (PasswordManageListView.SelectedItem != null && ManagePasswordsViewModel.PasswordManageCollection != null)
+        if (PasswordManageListView.SelectedItem == null || ManagePasswordsViewModel.PasswordManageCollection == null) 
+            return;
+        
+        // Compare values
+        foreach (PasswordManageModel model in ManagePasswordsViewModel.PasswordManageCollection)
         {
-            foreach (PasswordManageModel model in ManagePasswordsViewModel.PasswordManageCollection)
+            if (model.appName == PasswordManageListView.ToString())
             {
-                if (model.appName == PasswordManageListView.ToString())
+                MessageBox.Show("Item has been found!");
+                    
+                ManagePasswordsViewModel._passwordManageModel.appName = model.appName;
+                ManagePasswordsViewModel._passwordManageModel.appUsername = model.appUsername;
+                ManagePasswordsViewModel._passwordManageModel.appPassword = model.appPassword;
+                
+                return;
+            }
+        }
+        /*
+        var selectedItems = PasswordManageListView.SelectedItems;
+
+        if (selectedItems != null)
+        {
+            foreach (ListViewItem item in selectedItems)
+            {
+                ManagePasswordsViewModel.PasswordManageCollection.Contains((PasswordManageModel)selectedItems);
+               
+                foreach (PasswordManageModel model in ManagePasswordsViewModel.PasswordManageCollection)
                 {
-                    MessageBox.Show("Item has been found!");
-                    // static model -> set info value in managepassviewmodel?
+                    if (model.appName == item.ToString())
+                    {
+                        MessageBox.Show("Item has been found!");
+                    
+                        ManagePasswordsViewModel._passwordManageModel.appName = model.appName;
+                        ManagePasswordsViewModel._passwordManageModel.appUsername = model.appUsername;
+                        ManagePasswordsViewModel._passwordManageModel.appPassword = model.appPassword;
+
+                        break;
+                    }
                 }
             }
         }
+        */
     }
 }

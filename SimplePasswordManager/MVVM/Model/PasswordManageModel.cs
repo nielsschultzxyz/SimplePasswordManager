@@ -3,8 +3,8 @@
 public class PasswordManageModel
 {
     public string appName { get; set; }
-    private string appUsername { get; set; }
-    private string appPassword { get; set; }
+    public string appUsername { get; set; }
+    public string appPassword { get; set; }
 
     public PasswordManageModel(string appName, string appUsername, string appPassword)
     {

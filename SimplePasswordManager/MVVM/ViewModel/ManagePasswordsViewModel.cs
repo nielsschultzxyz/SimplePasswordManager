@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using SimplePasswordManager.Core;
 using SimplePasswordManager.Encryption;
 using SimplePasswordManager.MVVM.Model;
+using SimplePasswordManager.MVVM.View;
 
 namespace SimplePasswordManager.MVVM.ViewModel;
 
@@ -15,6 +16,8 @@ public class ManagePasswordsViewModel : Core.ViewModel
     
     private EncryptionHandler _encryptionHandler;
     private FileEdit _fileEdit;
+    
+    public static PasswordManageModel _passwordManageModel;
     
     private string _appPassword = "AppPassword";
 
@@ -109,6 +112,7 @@ public class ManagePasswordsViewModel : Core.ViewModel
         _encryptionHandler = new EncryptionHandler();
         _fileEdit = new FileEdit();
         PasswordManageCollection = new ObservableCollection<PasswordManageModel>();
+        _passwordManageModel = new PasswordManageModel("AppName", "AppUsername", "AppPassword");
         
         var txtManagePasswordString = _fileEdit.getTxtFileValues(filePath);
         getCollecionValues(txtManagePasswordString);
@@ -147,15 +151,21 @@ public class ManagePasswordsViewModel : Core.ViewModel
 
         try
         {
+            // \n separator?
             string[] splitManagePasswordLine = txtFileValues.Split(";");
             string[] splitManagePasswordStrings;
 
-            foreach (var s in splitManagePasswordLine)
+            if (splitManagePasswordLine.Length > 0)
             {
-                splitManagePasswordStrings = s.Split(" ");
-                PasswordManageCollection?.Add(new PasswordManageModel(splitManagePasswordStrings[0], 
-                    splitManagePasswordStrings[1], splitManagePasswordStrings[2]));
+                for (int i = 0; i < splitManagePasswordLine.Length -1; i++)
+                {
+                    splitManagePasswordStrings = splitManagePasswordLine[i].Split(" ");
+                    PasswordManageCollection?.Add(new PasswordManageModel(splitManagePasswordStrings[0], 
+                        splitManagePasswordStrings[1], 
+                        splitManagePasswordStrings[2]));
+                }    
             }
+            
         }
         catch (Exception ex)    
         {
