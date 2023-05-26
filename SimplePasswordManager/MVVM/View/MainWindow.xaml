@@ -30,11 +30,12 @@
                     <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Center"
                         Margin="12,0,12,0">
-                        
+                        <!--
                         <Label Content="Logo"
                                Foreground="White"
                                FontSize="15"
                                FontWeight="Bold"/>
+                               -->
                         <!--
                         <Button Content="Home"
                                 Command="{Binding NavigateToHomeCommand}"
@@ -58,7 +59,7 @@
 
                             <TextBlock VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
-                                       Text="Placeholder =>"
+                                       Text="🐧 SimplePM"
                                        FontWeight="Bold"
                                        Foreground="Gray"
                                        FontSize="15"/>
@@ -107,8 +108,8 @@
             
             <!--Column2-->
             <DockPanel Grid.Column="1">
-                <Grid Height="80" DockPanel.Dock="Top"
-                      Margin="2,32,2,2">
+                <Grid Height="60" DockPanel.Dock="Top"
+                      Margin="2,40,2,2">
                     
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="80"/>
@@ -116,14 +117,14 @@
                     </Grid.ColumnDefinitions>
 
                     <Border Background="#23252b"
-                            CornerRadius="360">
+                            CornerRadius="4">
                         <TextBlock Background="Transparent"
                                    Margin="4"
-                                   Text="User"
+                                   Text="🧔"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    Foreground="White"
-                                   FontSize="14"/>    
+                                   FontSize="34"/>    
                     </Border>
                     
                     
@@ -136,25 +137,43 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             
-                            <TextBlock Text="Username"
+                            <TextBlock Text="Demo-user"
                                        Margin="18,-14,0,0"
                                        VerticalAlignment="Center"
                                        Foreground="Azure"
                                        FontSize="15"/>
                             
                             <TextBlock Grid.Row="1"
-                                       Text="Placeholder"
+                                       Text="Location: Germany"
                                        Margin="18,12,0,0"
                                        VerticalAlignment="Center"
                                        Foreground="Azure"/>
                         </Grid>
                     </StackPanel>
                 </Grid>
+                <TextBlock DockPanel.Dock="Top"
+                           Text="Search a Password manage template"
+                           Foreground="Azure"
+                           Margin="12,12,0,8"/>
+                
+                <TextBox DockPanel.Dock="Top"
+                         Style="{StaticResource SearchBox}"
+                         Margin="0,2,6,12"/>
+                
+                <Separator Foreground="Azure"
+                           Margin="12,4,12,4"
+                           DockPanel.Dock="Top"/>
+                
+                <TextBlock DockPanel.Dock="Top"
+                           Text="Select a Password manage template"
+                           Foreground="Azure"
+                           Margin="12,12,0,8"/>
                 
                 <ListView DockPanel.Dock="Top"
-                          Margin="2"
+                          Margin="0,2,0,2"
                           Background="Transparent"
-                          BorderBrush="Transparent">
+                          BorderBrush="Transparent"
+                          ItemsSource="{Binding AllPasswordModels}">
                     
                 </ListView>
             </DockPanel>

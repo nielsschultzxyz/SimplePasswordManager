@@ -32,14 +32,14 @@
                             <Style TargetType="Border">
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="Gray"/>
+                                        <Setter Property="Background" Value="#4b40bf"/>
                                     </Trigger>
                                     <Trigger Property="IsMouseOver" Value="False">
-                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="Background" Value="#23252b"/>
                                     </Trigger>
                                     <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}}, 
                                         Path=IsSelected}" Value="True">
-                                        <Setter Property="Background" Value="#4b40bf"/>
+                                        <Setter Property="Background" Value="Gray"/>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -51,13 +51,30 @@
                                           CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ListView}, Path=SelectedItem}"/>
                         </Border.InputBindings>
                         -->
-                        <!--Tempalte layout-->
-                        <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="{Binding appName}" Margin="8,4,8,4" VerticalAlignment="Center" Foreground="LightGray" FontWeight="Bold"/>
-                            <!--
-                            <TextBlock Text="Binding Username" Margin="22,2,8,2" VerticalAlignment="Center" Foreground="White"/>
-                            -->
-                        </StackPanel>
+                        <!--Template layout-->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.8*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <!--Column0 Icon-->
+                            <TextBlock Grid.Column="0" Text="🕵️‍♀️" Margin="22,2,8,2" VerticalAlignment="Center" Foreground="#4b40bf" FontSize="18"/>
+                            
+                            <!--Column1 InfoText-->
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Orientation="Vertical" HorizontalAlignment="Left">
+                            
+                                <!--AppName-->
+                                <TextBlock Text="{Binding appName}" Margin="8,4,8,4" VerticalAlignment="Center" Foreground="LightGray" 
+                                           FontWeight="Bold" HorizontalAlignment="Left" FontSize="11"/>
+                                <!--AppUsername-->
+                                <TextBlock Text="{Binding appUsername}" Margin="8,4,8,4" VerticalAlignment="Center" Foreground="LightGray" 
+                                           FontWeight="Normal" HorizontalAlignment="Left" FontSize="11"/>
+                            
+                            </StackPanel>
+                            
+                        </Grid>
+                        
                     </Border>
                 </DataTemplate>
             </Setter.Value>
